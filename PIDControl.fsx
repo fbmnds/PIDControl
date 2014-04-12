@@ -75,7 +75,7 @@ type m
 type s
 
 let x = 0.<m>
-let xTarget = 3.<m>
+let xTarget = 3.5<m>
 let startTime = 0.0<s>
 let eps = 0.01<m>
 let maxTrials = 1000
@@ -83,7 +83,7 @@ let maxTrials = 1000
 let pid = PIDController(1.<1/s>,0.01<1/s>,0.01<s>,xTarget,0.1<s>,None,None)
 
 let w = (pid.Waypoints x startTime eps maxTrials)
-        |> Seq.map (fun (x,y) -> ((float x), (float y)))
+        |> Seq.map (fun (x,y) -> (System.Math.Round((float y), 2), (float x)))
         |> List.ofSeq
 
 for i in w do printfn "%A" i
